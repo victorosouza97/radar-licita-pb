@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar Licita PB</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <nav class="nav" aria-label="Módulos">
+    <div class="brand"><div class="brand-mark">RL</div><div><b>Radar Licita PB</b><span>SOUZAUTO LUB</span></div></div>
+    <ul id="nav">
+      <li><button data-go="painel">Painel</button></li>
+      <li><button data-go="oport">Oportunidades</button></li>
+      <li><button data-go="docs">Documentos</button></li>
+      <li><button data-go="ajustes">Ajustes</button></li>
+    </ul>
+    <div class="nav-foot" id="coleta-box"></div>
+  </nav>
+  <main class="main"><div id="view"><p class="muted">Carregando…</p></div></main>
+</div>
+<div class="toast" id="toast" hidden></div>
+<dialog id="dlg-doc"></dialog>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

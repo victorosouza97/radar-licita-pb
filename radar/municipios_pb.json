@@ -1,0 +1,1340 @@
+[
+{
+"ibge": "2500205",
+"nome": "Aguiar",
+"lat": -7.0918,
+"lon": -38.1681
+},
+{
+"ibge": "2500304",
+"nome": "Alagoa Grande",
+"lat": -7.03943,
+"lon": -35.6206
+},
+{
+"ibge": "2500403",
+"nome": "Alagoa Nova",
+"lat": -7.05377,
+"lon": -35.7591
+},
+{
+"ibge": "2500502",
+"nome": "Alagoinha",
+"lat": -6.94657,
+"lon": -35.5332
+},
+{
+"ibge": "2500536",
+"nome": "Alcantil",
+"lat": -7.73668,
+"lon": -36.0511
+},
+{
+"ibge": "2500577",
+"nome": "Algodão de Jandaíra",
+"lat": -6.89292,
+"lon": -36.0129
+},
+{
+"ibge": "2500601",
+"nome": "Alhandra",
+"lat": -7.42977,
+"lon": -34.9057
+},
+{
+"ibge": "2500734",
+"nome": "Amparo",
+"lat": -7.55502,
+"lon": -37.0628
+},
+{
+"ibge": "2500775",
+"nome": "Aparecida",
+"lat": -6.78466,
+"lon": -38.0803
+},
+{
+"ibge": "2500908",
+"nome": "Arara",
+"lat": -6.82813,
+"lon": -35.7552
+},
+{
+"ibge": "2501005",
+"nome": "Araruna",
+"lat": -6.54848,
+"lon": -35.7498
+},
+{
+"ibge": "2500809",
+"nome": "Araçagi",
+"lat": -6.84374,
+"lon": -35.3737
+},
+{
+"ibge": "2501104",
+"nome": "Areia",
+"lat": -6.96396,
+"lon": -35.6977
+},
+{
+"ibge": "2501153",
+"nome": "Areia de Baraúnas",
+"lat": -7.11702,
+"lon": -36.9404
+},
+{
+"ibge": "2501203",
+"nome": "Areial",
+"lat": -7.04789,
+"lon": -35.9313
+},
+{
+"ibge": "2501302",
+"nome": "Aroeiras",
+"lat": -7.54473,
+"lon": -35.7066
+},
+{
+"ibge": "2501351",
+"nome": "Assunção",
+"lat": -7.07231,
+"lon": -36.725
+},
+{
+"ibge": "2501500",
+"nome": "Bananeiras",
+"lat": -6.74775,
+"lon": -35.6246
+},
+{
+"ibge": "2501534",
+"nome": "Baraúna",
+"lat": -6.63484,
+"lon": -36.2601
+},
+{
+"ibge": "2501609",
+"nome": "Barra de Santa Rosa",
+"lat": -6.71816,
+"lon": -36.0671
+},
+{
+"ibge": "2501575",
+"nome": "Barra de Santana",
+"lat": -7.51809,
+"lon": -35.9913
+},
+{
+"ibge": "2501708",
+"nome": "Barra de São Miguel",
+"lat": -7.74603,
+"lon": -36.3209
+},
+{
+"ibge": "2501807",
+"nome": "Bayeux",
+"lat": -7.1238,
+"lon": -34.9293
+},
+{
+"ibge": "2501401",
+"nome": "Baía da Traição",
+"lat": -6.69209,
+"lon": -34.9381
+},
+{
+"ibge": "2501906",
+"nome": "Belém",
+"lat": -6.74261,
+"lon": -35.5166
+},
+{
+"ibge": "2502003",
+"nome": "Belém do Brejo do Cruz",
+"lat": -6.18515,
+"lon": -37.5348
+},
+{
+"ibge": "2502052",
+"nome": "Bernardino Batista",
+"lat": -6.44572,
+"lon": -38.5521
+},
+{
+"ibge": "2502102",
+"nome": "Boa Ventura",
+"lat": -7.40982,
+"lon": -38.2113
+},
+{
+"ibge": "2502151",
+"nome": "Boa Vista",
+"lat": -7.26365,
+"lon": -36.2357
+},
+{
+"ibge": "2502201",
+"nome": "Bom Jesus",
+"lat": -6.81601,
+"lon": -38.6453
+},
+{
+"ibge": "2502300",
+"nome": "Bom Sucesso",
+"lat": -6.44176,
+"lon": -37.9234
+},
+{
+"ibge": "2502409",
+"nome": "Bonito de Santa Fé",
+"lat": -7.31341,
+"lon": -38.5133
+},
+{
+"ibge": "2502508",
+"nome": "Boqueirão",
+"lat": -7.487,
+"lon": -36.1309
+},
+{
+"ibge": "2502706",
+"nome": "Borborema",
+"lat": -6.80199,
+"lon": -35.6187
+},
+{
+"ibge": "2502805",
+"nome": "Brejo do Cruz",
+"lat": -6.34185,
+"lon": -37.4943
+},
+{
+"ibge": "2502904",
+"nome": "Brejo dos Santos",
+"lat": -6.37065,
+"lon": -37.8253
+},
+{
+"ibge": "2503001",
+"nome": "Caaporã",
+"lat": -7.51351,
+"lon": -34.9055
+},
+{
+"ibge": "2503100",
+"nome": "Cabaceiras",
+"lat": -7.48899,
+"lon": -36.287
+},
+{
+"ibge": "2503209",
+"nome": "Cabedelo",
+"lat": -6.98731,
+"lon": -34.8284
+},
+{
+"ibge": "2503308",
+"nome": "Cachoeira dos Índios",
+"lat": -6.91353,
+"lon": -38.676
+},
+{
+"ibge": "2503407",
+"nome": "Cacimba de Areia",
+"lat": -7.12128,
+"lon": -37.1563
+},
+{
+"ibge": "2503506",
+"nome": "Cacimba de Dentro",
+"lat": -6.6386,
+"lon": -35.7778
+},
+{
+"ibge": "2503555",
+"nome": "Cacimbas",
+"lat": -7.20721,
+"lon": -37.0604
+},
+{
+"ibge": "2503605",
+"nome": "Caiçara",
+"lat": -6.62115,
+"lon": -35.4581
+},
+{
+"ibge": "2503704",
+"nome": "Cajazeiras",
+"lat": -6.88004,
+"lon": -38.5577
+},
+{
+"ibge": "2503753",
+"nome": "Cajazeirinhas",
+"lat": -6.96016,
+"lon": -37.8009
+},
+{
+"ibge": "2503803",
+"nome": "Caldas Brandão",
+"lat": -7.1025,
+"lon": -35.3272
+},
+{
+"ibge": "2503902",
+"nome": "Camalaú",
+"lat": -7.88503,
+"lon": -36.8242
+},
+{
+"ibge": "2504009",
+"nome": "Campina Grande",
+"lat": -7.22196,
+"lon": -35.8731
+},
+{
+"ibge": "2504033",
+"nome": "Capim",
+"lat": -6.91624,
+"lon": -35.1673
+},
+{
+"ibge": "2504074",
+"nome": "Caraúbas",
+"lat": -7.72049,
+"lon": -36.492
+},
+{
+"ibge": "2504108",
+"nome": "Carrapateira",
+"lat": -7.03414,
+"lon": -38.3399
+},
+{
+"ibge": "2504157",
+"nome": "Casserengue",
+"lat": -6.77954,
+"lon": -35.8179
+},
+{
+"ibge": "2504207",
+"nome": "Catingueira",
+"lat": -7.12008,
+"lon": -37.6064
+},
+{
+"ibge": "2504306",
+"nome": "Catolé do Rocha",
+"lat": -6.34062,
+"lon": -37.747
+},
+{
+"ibge": "2504355",
+"nome": "Caturité",
+"lat": -7.41659,
+"lon": -36.0306
+},
+{
+"ibge": "2504405",
+"nome": "Conceição",
+"lat": -7.55106,
+"lon": -38.5014
+},
+{
+"ibge": "2504504",
+"nome": "Condado",
+"lat": -6.89831,
+"lon": -37.606
+},
+{
+"ibge": "2504603",
+"nome": "Conde",
+"lat": -7.25746,
+"lon": -34.8999
+},
+{
+"ibge": "2504702",
+"nome": "Congo",
+"lat": -7.79078,
+"lon": -36.6581
+},
+{
+"ibge": "2504801",
+"nome": "Coremas",
+"lat": -7.00712,
+"lon": -37.9346
+},
+{
+"ibge": "2504850",
+"nome": "Coxixola",
+"lat": -7.62365,
+"lon": -36.6064
+},
+{
+"ibge": "2504900",
+"nome": "Cruz do Espírito Santo",
+"lat": -7.13902,
+"lon": -35.0857
+},
+{
+"ibge": "2505006",
+"nome": "Cubati",
+"lat": -6.86686,
+"lon": -36.3619
+},
+{
+"ibge": "2505204",
+"nome": "Cuitegi",
+"lat": -6.89058,
+"lon": -35.5215
+},
+{
+"ibge": "2505105",
+"nome": "Cuité",
+"lat": -6.47647,
+"lon": -36.1515
+},
+{
+"ibge": "2505238",
+"nome": "Cuité de Mamanguape",
+"lat": -6.91292,
+"lon": -35.2502
+},
+{
+"ibge": "2505303",
+"nome": "Curral Velho",
+"lat": -7.53075,
+"lon": -38.1962
+},
+{
+"ibge": "2505279",
+"nome": "Curral de Cima",
+"lat": -6.72325,
+"lon": -35.2639
+},
+{
+"ibge": "2505352",
+"nome": "Damião",
+"lat": -6.63161,
+"lon": -35.9101
+},
+{
+"ibge": "2505402",
+"nome": "Desterro",
+"lat": -7.287,
+"lon": -37.0925
+},
+{
+"ibge": "2505600",
+"nome": "Diamante",
+"lat": -7.41738,
+"lon": -38.2615
+},
+{
+"ibge": "2505709",
+"nome": "Dona Inês",
+"lat": -6.61566,
+"lon": -35.6205
+},
+{
+"ibge": "2505808",
+"nome": "Duas Estradas",
+"lat": -6.68499,
+"lon": -35.418
+},
+{
+"ibge": "2505907",
+"nome": "Emas",
+"lat": -7.09964,
+"lon": -37.7163
+},
+{
+"ibge": "2506004",
+"nome": "Esperança",
+"lat": -7.02278,
+"lon": -35.8597
+},
+{
+"ibge": "2506103",
+"nome": "Fagundes",
+"lat": -7.34454,
+"lon": -35.7931
+},
+{
+"ibge": "2506202",
+"nome": "Frei Martinho",
+"lat": -6.39759,
+"lon": -36.4526
+},
+{
+"ibge": "2506251",
+"nome": "Gado Bravo",
+"lat": -7.58279,
+"lon": -35.7899
+},
+{
+"ibge": "2506301",
+"nome": "Guarabira",
+"lat": -6.85064,
+"lon": -35.485
+},
+{
+"ibge": "2506400",
+"nome": "Gurinhém",
+"lat": -7.1233,
+"lon": -35.4222
+},
+{
+"ibge": "2506509",
+"nome": "Gurjão",
+"lat": -7.24833,
+"lon": -36.4923
+},
+{
+"ibge": "2506608",
+"nome": "Ibiara",
+"lat": -7.47957,
+"lon": -38.4059
+},
+{
+"ibge": "2502607",
+"nome": "Igaracy",
+"lat": -7.17184,
+"lon": -38.1478
+},
+{
+"ibge": "2506707",
+"nome": "Imaculada",
+"lat": -7.3889,
+"lon": -37.5079
+},
+{
+"ibge": "2506806",
+"nome": "Ingá",
+"lat": -7.28144,
+"lon": -35.605
+},
+{
+"ibge": "2506905",
+"nome": "Itabaiana",
+"lat": -7.33167,
+"lon": -35.3317
+},
+{
+"ibge": "2507002",
+"nome": "Itaporanga",
+"lat": -7.30202,
+"lon": -38.1504
+},
+{
+"ibge": "2507101",
+"nome": "Itapororoca",
+"lat": -6.82374,
+"lon": -35.2406
+},
+{
+"ibge": "2507200",
+"nome": "Itatuba",
+"lat": -7.38115,
+"lon": -35.638
+},
+{
+"ibge": "2507309",
+"nome": "Jacaraú",
+"lat": -6.61453,
+"lon": -35.289
+},
+{
+"ibge": "2507408",
+"nome": "Jericó",
+"lat": -6.54577,
+"lon": -37.8036
+},
+{
+"ibge": "2513653",
+"nome": "Joca Claudino",
+"lat": -6.48362,
+"lon": -38.4764
+},
+{
+"ibge": "2507507",
+"nome": "João Pessoa",
+"lat": -7.11509,
+"lon": -34.8641
+},
+{
+"ibge": "2507606",
+"nome": "Juarez Távora",
+"lat": -7.1713,
+"lon": -35.5686
+},
+{
+"ibge": "2507705",
+"nome": "Juazeirinho",
+"lat": -7.06092,
+"lon": -36.5793
+},
+{
+"ibge": "2507804",
+"nome": "Junco do Seridó",
+"lat": -6.99269,
+"lon": -36.7166
+},
+{
+"ibge": "2507903",
+"nome": "Juripiranga",
+"lat": -7.36176,
+"lon": -35.2321
+},
+{
+"ibge": "2508000",
+"nome": "Juru",
+"lat": -7.52983,
+"lon": -37.815
+},
+{
+"ibge": "2508109",
+"nome": "Lagoa",
+"lat": -6.58572,
+"lon": -37.9127
+},
+{
+"ibge": "2508307",
+"nome": "Lagoa Seca",
+"lat": -7.15535,
+"lon": -35.8491
+},
+{
+"ibge": "2508208",
+"nome": "Lagoa de Dentro",
+"lat": -6.67213,
+"lon": -35.3706
+},
+{
+"ibge": "2508406",
+"nome": "Lastro",
+"lat": -6.50603,
+"lon": -38.1742
+},
+{
+"ibge": "2508505",
+"nome": "Livramento",
+"lat": -7.37113,
+"lon": -36.9491
+},
+{
+"ibge": "2508554",
+"nome": "Logradouro",
+"lat": -6.61191,
+"lon": -35.4384
+},
+{
+"ibge": "2508604",
+"nome": "Lucena",
+"lat": -6.90258,
+"lon": -34.8748
+},
+{
+"ibge": "2508802",
+"nome": "Malta",
+"lat": -6.89719,
+"lon": -37.5221
+},
+{
+"ibge": "2508901",
+"nome": "Mamanguape",
+"lat": -6.8337,
+"lon": -35.1213
+},
+{
+"ibge": "2509008",
+"nome": "Manaíra",
+"lat": -7.70331,
+"lon": -38.1523
+},
+{
+"ibge": "2509057",
+"nome": "Marcação",
+"lat": -6.76535,
+"lon": -35.0087
+},
+{
+"ibge": "2509107",
+"nome": "Mari",
+"lat": -7.05942,
+"lon": -35.318
+},
+{
+"ibge": "2509156",
+"nome": "Marizópolis",
+"lat": -6.82748,
+"lon": -38.3528
+},
+{
+"ibge": "2509206",
+"nome": "Massaranduba",
+"lat": -7.18995,
+"lon": -35.7848
+},
+{
+"ibge": "2509305",
+"nome": "Mataraca",
+"lat": -6.59673,
+"lon": -35.0531
+},
+{
+"ibge": "2509339",
+"nome": "Matinhas",
+"lat": -7.12486,
+"lon": -35.7669
+},
+{
+"ibge": "2509370",
+"nome": "Mato Grosso",
+"lat": -6.54018,
+"lon": -37.7279
+},
+{
+"ibge": "2509396",
+"nome": "Maturéia",
+"lat": -7.26188,
+"lon": -37.351
+},
+{
+"ibge": "2509404",
+"nome": "Mogeiro",
+"lat": -7.28517,
+"lon": -35.4832
+},
+{
+"ibge": "2509503",
+"nome": "Montadas",
+"lat": -7.08848,
+"lon": -35.9592
+},
+{
+"ibge": "2509602",
+"nome": "Monte Horebe",
+"lat": -7.20402,
+"lon": -38.5838
+},
+{
+"ibge": "2509701",
+"nome": "Monteiro",
+"lat": -7.88363,
+"lon": -37.1184
+},
+{
+"ibge": "2509800",
+"nome": "Mulungu",
+"lat": -7.02525,
+"lon": -35.46
+},
+{
+"ibge": "2508703",
+"nome": "Mãe d'Água",
+"lat": -7.25201,
+"lon": -37.4322
+},
+{
+"ibge": "2509909",
+"nome": "Natuba",
+"lat": -7.63514,
+"lon": -35.5586
+},
+{
+"ibge": "2510006",
+"nome": "Nazarezinho",
+"lat": -6.9114,
+"lon": -38.322
+},
+{
+"ibge": "2510105",
+"nome": "Nova Floresta",
+"lat": -6.45056,
+"lon": -36.2057
+},
+{
+"ibge": "2510204",
+"nome": "Nova Olinda",
+"lat": -7.47232,
+"lon": -38.0382
+},
+{
+"ibge": "2510303",
+"nome": "Nova Palmeira",
+"lat": -6.67122,
+"lon": -36.422
+},
+{
+"ibge": "2510402",
+"nome": "Olho d'Água",
+"lat": -7.22118,
+"lon": -37.7406
+},
+{
+"ibge": "2510501",
+"nome": "Olivedos",
+"lat": -6.98434,
+"lon": -36.241
+},
+{
+"ibge": "2510600",
+"nome": "Ouro Velho",
+"lat": -7.61604,
+"lon": -37.1519
+},
+{
+"ibge": "2510659",
+"nome": "Parari",
+"lat": -7.30975,
+"lon": -36.6522
+},
+{
+"ibge": "2510709",
+"nome": "Passagem",
+"lat": -7.13467,
+"lon": -37.0433
+},
+{
+"ibge": "2510808",
+"nome": "Patos",
+"lat": -7.01743,
+"lon": -37.2747
+},
+{
+"ibge": "2510907",
+"nome": "Paulista",
+"lat": -6.59138,
+"lon": -37.6185
+},
+{
+"ibge": "2511004",
+"nome": "Pedra Branca",
+"lat": -7.42169,
+"lon": -38.0689
+},
+{
+"ibge": "2511103",
+"nome": "Pedra Lavrada",
+"lat": -6.74997,
+"lon": -36.4758
+},
+{
+"ibge": "2511202",
+"nome": "Pedras de Fogo",
+"lat": -7.39107,
+"lon": -35.1065
+},
+{
+"ibge": "2512721",
+"nome": "Pedro Régis",
+"lat": -6.63323,
+"lon": -35.2966
+},
+{
+"ibge": "2511301",
+"nome": "Piancó",
+"lat": -7.19282,
+"lon": -37.9289
+},
+{
+"ibge": "2511400",
+"nome": "Picuí",
+"lat": -6.50845,
+"lon": -36.3497
+},
+{
+"ibge": "2511509",
+"nome": "Pilar",
+"lat": -7.26403,
+"lon": -35.2523
+},
+{
+"ibge": "2511608",
+"nome": "Pilões",
+"lat": -6.86827,
+"lon": -35.613
+},
+{
+"ibge": "2511707",
+"nome": "Pilõezinhos",
+"lat": -6.84277,
+"lon": -35.531
+},
+{
+"ibge": "2511806",
+"nome": "Pirpirituba",
+"lat": -6.77922,
+"lon": -35.4906
+},
+{
+"ibge": "2511905",
+"nome": "Pitimbu",
+"lat": -7.4664,
+"lon": -34.8151
+},
+{
+"ibge": "2512002",
+"nome": "Pocinhos",
+"lat": -7.06658,
+"lon": -36.0668
+},
+{
+"ibge": "2512101",
+"nome": "Pombal",
+"lat": -6.76606,
+"lon": -37.8003
+},
+{
+"ibge": "2512036",
+"nome": "Poço Dantas",
+"lat": -6.39876,
+"lon": -38.4909
+},
+{
+"ibge": "2512077",
+"nome": "Poço de José de Moura",
+"lat": -6.56401,
+"lon": -38.5111
+},
+{
+"ibge": "2512200",
+"nome": "Prata",
+"lat": -7.68826,
+"lon": -37.0801
+},
+{
+"ibge": "2512309",
+"nome": "Princesa Isabel",
+"lat": -7.73175,
+"lon": -37.9886
+},
+{
+"ibge": "2512408",
+"nome": "Puxinanã",
+"lat": -7.15479,
+"lon": -35.9543
+},
+{
+"ibge": "2512507",
+"nome": "Queimadas",
+"lat": -7.35029,
+"lon": -35.9031
+},
+{
+"ibge": "2512606",
+"nome": "Quixaba",
+"lat": -7.0224,
+"lon": -37.1458
+},
+{
+"ibge": "2512705",
+"nome": "Remígio",
+"lat": -6.94992,
+"lon": -35.8011
+},
+{
+"ibge": "2512788",
+"nome": "Riacho de Santo Antônio",
+"lat": -7.68023,
+"lon": -36.157
+},
+{
+"ibge": "2512804",
+"nome": "Riacho dos Cavalos",
+"lat": -6.44067,
+"lon": -37.6483
+},
+{
+"ibge": "2512747",
+"nome": "Riachão",
+"lat": -6.54269,
+"lon": -35.661
+},
+{
+"ibge": "2512754",
+"nome": "Riachão do Bacamarte",
+"lat": -7.25347,
+"lon": -35.6693
+},
+{
+"ibge": "2512762",
+"nome": "Riachão do Poço",
+"lat": -7.14173,
+"lon": -35.2914
+},
+{
+"ibge": "2512903",
+"nome": "Rio Tinto",
+"lat": -6.80383,
+"lon": -35.0776
+},
+{
+"ibge": "2513000",
+"nome": "Salgadinho",
+"lat": -7.10098,
+"lon": -36.8458
+},
+{
+"ibge": "2513109",
+"nome": "Salgado de São Félix",
+"lat": -7.35337,
+"lon": -35.4305
+},
+{
+"ibge": "2513158",
+"nome": "Santa Cecília",
+"lat": -7.7389,
+"lon": -35.8764
+},
+{
+"ibge": "2513208",
+"nome": "Santa Cruz",
+"lat": -6.5237,
+"lon": -38.0617
+},
+{
+"ibge": "2513307",
+"nome": "Santa Helena",
+"lat": -6.7176,
+"lon": -38.6427
+},
+{
+"ibge": "2513356",
+"nome": "Santa Inês",
+"lat": -7.621,
+"lon": -38.554
+},
+{
+"ibge": "2513406",
+"nome": "Santa Luzia",
+"lat": -6.86092,
+"lon": -36.9178
+},
+{
+"ibge": "2513703",
+"nome": "Santa Rita",
+"lat": -7.11724,
+"lon": -34.9753
+},
+{
+"ibge": "2513802",
+"nome": "Santa Teresinha",
+"lat": -7.07964,
+"lon": -37.4435
+},
+{
+"ibge": "2513505",
+"nome": "Santana de Mangueira",
+"lat": -7.54705,
+"lon": -38.3236
+},
+{
+"ibge": "2513604",
+"nome": "Santana dos Garrotes",
+"lat": -7.38162,
+"lon": -37.9819
+},
+{
+"ibge": "2513851",
+"nome": "Santo André",
+"lat": -7.22016,
+"lon": -36.6213
+},
+{
+"ibge": "2515302",
+"nome": "Sapé",
+"lat": -7.09359,
+"lon": -35.228
+},
+{
+"ibge": "2515500",
+"nome": "Serra Branca",
+"lat": -7.48034,
+"lon": -36.666
+},
+{
+"ibge": "2515708",
+"nome": "Serra Grande",
+"lat": -7.20957,
+"lon": -38.3647
+},
+{
+"ibge": "2515807",
+"nome": "Serra Redonda",
+"lat": -7.18622,
+"lon": -35.6842
+},
+{
+"ibge": "2515609",
+"nome": "Serra da Raiz",
+"lat": -6.68527,
+"lon": -35.4379
+},
+{
+"ibge": "2515906",
+"nome": "Serraria",
+"lat": -6.81569,
+"lon": -35.6282
+},
+{
+"ibge": "2515930",
+"nome": "Sertãozinho",
+"lat": -6.75127,
+"lon": -35.4372
+},
+{
+"ibge": "2515971",
+"nome": "Sobrado",
+"lat": -7.14429,
+"lon": -35.2357
+},
+{
+"ibge": "2516102",
+"nome": "Soledade",
+"lat": -7.05829,
+"lon": -36.3668
+},
+{
+"ibge": "2516003",
+"nome": "Solânea",
+"lat": -6.75161,
+"lon": -35.6636
+},
+{
+"ibge": "2516151",
+"nome": "Sossêgo",
+"lat": -6.77067,
+"lon": -36.2538
+},
+{
+"ibge": "2516201",
+"nome": "Sousa",
+"lat": -6.75148,
+"lon": -38.2311
+},
+{
+"ibge": "2516300",
+"nome": "Sumé",
+"lat": -7.66206,
+"lon": -36.884
+},
+{
+"ibge": "2513927",
+"nome": "São Bentinho",
+"lat": -6.88596,
+"lon": -37.7243
+},
+{
+"ibge": "2513901",
+"nome": "São Bento",
+"lat": -6.48529,
+"lon": -37.4488
+},
+{
+"ibge": "2513968",
+"nome": "São Domingos",
+"lat": -6.80313,
+"lon": -37.9488
+},
+{
+"ibge": "2513943",
+"nome": "São Domingos do Cariri",
+"lat": -7.63273,
+"lon": -36.4374
+},
+{
+"ibge": "2513984",
+"nome": "São Francisco",
+"lat": -6.60773,
+"lon": -38.0968
+},
+{
+"ibge": "2514206",
+"nome": "São José da Lagoa Tapada",
+"lat": -6.93646,
+"lon": -38.1622
+},
+{
+"ibge": "2514305",
+"nome": "São José de Caiana",
+"lat": -7.24636,
+"lon": -38.2989
+},
+{
+"ibge": "2514404",
+"nome": "São José de Espinharas",
+"lat": -6.83974,
+"lon": -37.3214
+},
+{
+"ibge": "2514503",
+"nome": "São José de Piranhas",
+"lat": -7.1187,
+"lon": -38.502
+},
+{
+"ibge": "2514552",
+"nome": "São José de Princesa",
+"lat": -7.73633,
+"lon": -38.0894
+},
+{
+"ibge": "2514602",
+"nome": "São José do Bonfim",
+"lat": -7.1607,
+"lon": -37.3036
+},
+{
+"ibge": "2514651",
+"nome": "São José do Brejo do Cruz",
+"lat": -6.21054,
+"lon": -37.3601
+},
+{
+"ibge": "2514701",
+"nome": "São José do Sabugi",
+"lat": -6.76295,
+"lon": -36.7972
+},
+{
+"ibge": "2514800",
+"nome": "São José dos Cordeiros",
+"lat": -7.38775,
+"lon": -36.8085
+},
+{
+"ibge": "2514453",
+"nome": "São José dos Ramos",
+"lat": -7.25238,
+"lon": -35.3725
+},
+{
+"ibge": "2514008",
+"nome": "São João do Cariri",
+"lat": -7.38168,
+"lon": -36.5345
+},
+{
+"ibge": "2500700",
+"nome": "São João do Rio do Peixe",
+"lat": -6.72195,
+"lon": -38.4468
+},
+{
+"ibge": "2514107",
+"nome": "São João do Tigre",
+"lat": -8.07703,
+"lon": -36.8547
+},
+{
+"ibge": "2514909",
+"nome": "São Mamede",
+"lat": -6.92386,
+"lon": -37.0954
+},
+{
+"ibge": "2515005",
+"nome": "São Miguel de Taipu",
+"lat": -7.24764,
+"lon": -35.2016
+},
+{
+"ibge": "2515104",
+"nome": "São Sebastião de Lagoa de Roça",
+"lat": -7.11034,
+"lon": -35.8678
+},
+{
+"ibge": "2515203",
+"nome": "São Sebastião do Umbuzeiro",
+"lat": -8.15289,
+"lon": -37.0138
+},
+{
+"ibge": "2515401",
+"nome": "São Vicente do Seridó",
+"lat": -6.85426,
+"lon": -36.4122
+},
+{
+"ibge": "2516409",
+"nome": "Tacima",
+"lat": -6.48759,
+"lon": -35.6367
+},
+{
+"ibge": "2516508",
+"nome": "Taperoá",
+"lat": -7.20629,
+"lon": -36.8245
+},
+{
+"ibge": "2516607",
+"nome": "Tavares",
+"lat": -7.62697,
+"lon": -37.8712
+},
+{
+"ibge": "2516706",
+"nome": "Teixeira",
+"lat": -7.22104,
+"lon": -37.2525
+},
+{
+"ibge": "2516755",
+"nome": "Tenório",
+"lat": -6.93855,
+"lon": -36.6273
+},
+{
+"ibge": "2516805",
+"nome": "Triunfo",
+"lat": -6.5713,
+"lon": -38.5986
+},
+{
+"ibge": "2516904",
+"nome": "Uiraúna",
+"lat": -6.51504,
+"lon": -38.4128
+},
+{
+"ibge": "2517001",
+"nome": "Umbuzeiro",
+"lat": -7.69199,
+"lon": -35.6582
+},
+{
+"ibge": "2517209",
+"nome": "Vieirópolis",
+"lat": -6.50684,
+"lon": -38.2567
+},
+{
+"ibge": "2505501",
+"nome": "Vista Serrana",
+"lat": -6.7303,
+"lon": -37.5704
+},
+{
+"ibge": "2517100",
+"nome": "Várzea",
+"lat": -6.76189,
+"lon": -36.9913
+},
+{
+"ibge": "2517407",
+"nome": "Zabelê",
+"lat": -8.07901,
+"lon": -37.1057
+},
+{
+"ibge": "2500106",
+"nome": "Água Branca",
+"lat": -7.51144,
+"lon": -37.6357
+}
+]

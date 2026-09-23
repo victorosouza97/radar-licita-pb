@@ -1,0 +1,11 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Como no Placar 7 Wonders: quem tem o link do site pode ler e salvar.
+    // Só estas coleções do Radar ficam abertas; qualquer outra fica fechada.
+    match /marcas/{id}      { allow read, write: if true; }
+    match /documentos/{id}  { allow read, write: if true; }
+    match /pedidos_ia/{id}  { allow read, write: if true; }
+    match /config/{id}      { allow read, write: if true; }
+  }
+}

@@ -1,0 +1,69 @@
+# Roda o Radar todo dia às 7h (horário de Brasília) e publica o site.
+# Também dá para rodar na hora: aba "Actions" do GitHub > "Radar diário" > "Run workflow".
+name: Radar diário
+
+on:
+  schedule:
+    - cron: "45 9 * * *"   # 09:45 UTC = 06:45 em Brasília (o GitHub costuma atrasar alguns minutos)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: radar
+  cancel-in-progress: false
+
+jobs:
+  rodar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment:
+      name: github-pages
+      url: ${{ steps.publicar.outputs.page_url }}
+    env:
+      TZ: America/Sao_Paulo
+      FIREBASE_PROJECT: ${{ vars.FIREBASE_PROJECT }}
+      SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GMAIL_USER: ${{ secrets.GMAIL_USER }}
+      GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+      EMAIL_TO: ${{ secrets.EMAIL_TO }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Recupera o banco de dados de ontem
+        run: |
+          mkdir -p dados
+          if git fetch --depth=1 origin dados; then
+            git show FETCH_HEAD:radar.db > dados/radar.db
+          fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Busca licitações, lê editais e envia o e-mail
+        run: python rodar.py
+
+      - name: Guarda o banco de dados para amanhã
+        if: always()
+        run: |
+          [ -f dados/radar.db ] || exit 0
+          mkdir /tmp/banco && cp dados/radar.db /tmp/banco/ && cd /tmp/banco
+          git init -q -b dados
+          git add radar.db
+          git -c user.name="radar-bot" -c user.email="radar-bot@users.noreply.github.com" commit -q -m "banco $(date +%F)"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" dados
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: publicar
+        uses: actions/deploy-pages@v4
