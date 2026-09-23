@@ -126,7 +126,7 @@ async function vOport() {
 }
 async function carregarLista() {
   const f = state.f;
-  const qs = new URLSearchParams({ ver: f.ver, q: f.q, municipio: f.municipio, modalidade: f.modalidade, vmax: f.vmax, kmax: f.kmax, sem_raio_fora: f.semRaioFora ? '1' : '', me: f.me ? '1' : '', ordem: f.ordem, nota_min: f.ver === 'todas' ? '0' : '0.1' });
+  const qs = new URLSearchParams({ ver: f.ver, q: f.q, municipio: f.municipio, modalidade: f.modalidade, vmax: f.vmax, kmax: f.kmax, sem_raio_fora: f.semRaioFora ? '1' : '', me: f.me ? '1' : '', ordem: f.ordem, nota_min: f.ver === 'todas' ? '0' : '5' });
   dadosOport = await api('/api/oportunidades?' + qs);
   const d = dadosOport;
   const selM = $('#f-municipio'), selMod = $('#f-modalidade');

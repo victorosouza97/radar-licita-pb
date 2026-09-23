@@ -1,0 +1,50 @@
+# Republica o site quando só o visual/código do site muda, sem buscar licitações nem mandar e-mail.
+# Reaproveita os dados do dia que já estão no ar.
+name: Publicar site
+
+on:
+  push:
+    branches: [main]
+    paths: ["site/**"]
+  workflow_dispatch:
+
+permissions:
+  pages: write
+  id-token: write
+
+concurrency:
+  group: radar
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.publicar.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Copia os dados do dia que já estão no ar
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, urllib.request
+          base = "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/dados/"
+          pasta = pathlib.Path("site/dados/detalhe"); pasta.mkdir(parents=True, exist_ok=True)
+          bruto = urllib.request.urlopen(base + "oportunidades.json", timeout=60).read()
+          (pasta.parent / "oportunidades.json").write_bytes(bruto)
+          n = 0
+          for o in json.loads(bruto)["oportunidades"]:
+              nome = o["id"].replace("/", "_") + ".json"
+              try:
+                  (pasta / nome).write_bytes(urllib.request.urlopen(base + "detalhe/" + nome, timeout=60).read())
+                  n += 1
+              except Exception:
+                  pass
+          print("detalhes copiados:", n)
+          PY
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: publicar
+        uses: actions/deploy-pages@v4

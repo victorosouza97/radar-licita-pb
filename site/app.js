@@ -15,6 +15,7 @@ const idSeguro = id => id.replace(/\//g, '_');
 const limpar = s => (s || '').replace(/^\s*\[[^\]]*\]\s*-?\s*/, '').replace(/\s+/g, ' ').trim();
 const resumir = (s, n) => { s = limpar(s); return s.length > n ? s.slice(0, n - 1) + '…' : s; };
 const foraRaio = o => o.raio && o.km != null && o.km > o.raio;
+const NOTA_MINIMA = 5; // abaixo disso a licitação só aparece em "Todas abertas" (decisão do usuário)
 
 function toast(msg) {
   const t = $('#toast'); t.textContent = msg; t.hidden = false;
@@ -113,8 +114,8 @@ function vPainel() {
   const lista = oportunidades().filter(o => !o.descartado);
   const boas = lista.filter(o => o.nota >= 7).sort((a, b) => b.nota - a.nota);
   const limite = new Date(Date.now() + 7 * 86400000).toISOString();
-  const semana = lista.filter(o => o.nota > 0 && o.encerramento <= limite).sort((a, b) => a.encerramento.localeCompare(b.encerramento));
-  const novas = lista.filter(o => o.nova && o.nota > 0).length;
+  const semana = lista.filter(o => o.nota >= NOTA_MINIMA && o.encerramento <= limite).sort((a, b) => a.encerramento.localeCompare(b.encerramento));
+  const novas = lista.filter(o => o.nova && o.nota >= NOTA_MINIMA).length;
   const docs = docsComStatus();
   const alerta = docs.filter(d => d.status === 'bad' || d.status === 'warn');
   const pend = docs.filter(d => d.status === 'plain').length;
@@ -123,8 +124,8 @@ function vPainel() {
   <div class="view-head"><div><h2>Hoje é ${hoje}.</h2><p class="muted">Licitações abertas na Paraíba, lidas do PNCP (portal oficial do governo).</p></div></div>
   <div class="grid kpis">
     <button class="kpi" data-go="oport"><span class="label">Boas oportunidades</span><span class="big num">${boas.length}</span><span class="small muted">nota 7 ou mais, de ${lista.length} abertas na PB</span></button>
-    <button class="kpi" data-go="oport"><span class="label">Novas hoje</span><span class="big num">${novas}</span><span class="small muted">que combinam com suas palavras</span></button>
-    <button class="kpi warn" data-go="oport"><span class="label">Prazos em 7 dias</span><span class="big num">${semana.length}</span><span class="small muted">propostas fecham nesta semana</span></button>
+    <button class="kpi" data-go="oport"><span class="label">Novas hoje</span><span class="big num">${novas}</span><span class="small muted">com nota 5 ou mais</span></button>
+    <button class="kpi warn" data-go="oport"><span class="label">Prazos em 7 dias</span><span class="big num">${semana.length}</span><span class="small muted">propostas com nota 5 ou mais fecham nesta semana</span></button>
     <button class="kpi ${alerta.length ? 'bad' : ''}" data-go="docs"><span class="label">Documentos</span><span class="big num">${alerta.length + pend}</span><span class="small muted">${alerta.length ? `${alerta.filter(d => d.status === 'bad').length} vencido(s), ${alerta.filter(d => d.status === 'warn').length} vencendo` : pend ? `${pend} ainda não cadastrados` : 'tudo em dia'}</span></button>
   </div>
   <div class="grid dash">
@@ -171,7 +172,7 @@ function filtrar() {
   const res = oportunidades().filter(o => {
     if (f.ver === 'favoritas') { if (!o.favorito) return false; }
     else if (f.ver === 'descartadas') { if (!o.descartado) return false; }
-    else if (o.descartado || (f.ver === 'relevantes' && o.nota <= 0)) return false;
+    else if (o.descartado || (f.ver === 'relevantes' && o.nota < NOTA_MINIMA)) return false;
     if (q && !(o.objeto + ' ' + o.orgao).toLowerCase().includes(q)) return false;
     if (f.municipio && o.municipio !== f.municipio) return false;
     if (f.modalidade && o.modalidade !== f.modalidade) return false;
@@ -186,9 +187,9 @@ function filtrar() {
 }
 function carregarLista() {
   const lista = filtrar(), todas = oportunidades();
-  const rel = todas.filter(o => o.nota > 0 && !o.descartado).length;
+  const rel = todas.filter(o => o.nota >= NOTA_MINIMA && !o.descartado).length;
   const cont = $('#count'); if (!cont) return;
-  cont.textContent = `${lista.length} licitação(ões) nesta lista · ${rel} de ${todas.length} abertas na PB combinam com suas palavras`;
+  cont.textContent = `${lista.length} licitação(ões) nesta lista · ${rel} de ${todas.length} abertas na PB têm nota 5 ou mais`;
   $('#opp-list').innerHTML = lista.length ? lista.slice(0, 400).map(o => `
     <button class="opp" data-sel="${esc(o.id)}" aria-selected="${o.id === state.sel}">
       <div class="score ${o.nota > 0 ? scoreCls(o.nota) : 'bad'}">${notaTxt(o.nota)}<small>nota</small></div>
@@ -351,6 +352,7 @@ function vAjustes() {
         <li>Todo dia às 7h, o GitHub busca as licitações abertas da PB no PNCP, calcula as notas e atualiza este site.</li>
         <li>A IA (Gemini) lê sozinha os editais com nota acima de 6 (inclusive PDFs dentro de .zip e arquivos do Word): ${d.lidas_ia} lido(s) na última busca.</li>
         <li>Em seguida chega o e-mail do dia, com as novidades, os prazos dos próximos 3 dias e os documentos vencendo.</li>
+        <li>A aba “Combinam com você” e o painel mostram só as licitações com nota 5 ou mais; as demais ficam em “Todas abertas”.</li>
         <li>A distância é calculada de Campina Grande. Se o edital exigir um raio menor que a sua distância, a licitação perde 4 pontos e fica escondida.</li>
       </ul></section>
     ${bloco('palavras', 'Palavras que interessam', 'Procuradas no objeto e em cada item da licitação. Acentos e maiúsculas não importam.', 'ex.: amortecedor')}
