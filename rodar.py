@@ -96,7 +96,7 @@ CAMPOS_LISTA = ["id", "orgao", "unidade", "municipio", "objeto", "modalidade", "
                 "palavras", "itens_batem", "motivos", "alertas", "km", "raio"]
 
 
-def exportar_site(lista, info):
+def exportar_site(lista, info, pncp_fora=False):
     if PASTA_DADOS_SITE.exists():
         shutil.rmtree(PASTA_DADOS_SITE)
     (PASTA_DADOS_SITE / "detalhe").mkdir(parents=True)
@@ -108,10 +108,12 @@ def exportar_site(lista, info):
                 continue
             c = con.execute("SELECT * FROM contratacoes WHERE id=?", (o["id"],)).fetchone()
             itens = con.execute("SELECT * FROM itens WHERE contratacao_id=? ORDER BY numero", (o["id"],)).fetchall()
-            try:
-                arquivos = pncp.buscar_arquivos(c["cnpj"], c["ano"], c["seq"], tentativas=2)
-            except Exception:
-                arquivos = None
+            arquivos = None
+            if not pncp_fora:  # com o PNCP fora do ar, não perde tempo buscando a lista de arquivos
+                try:
+                    arquivos = pncp.buscar_arquivos(c["cnpj"], c["ano"], c["seq"], tentativas=2)
+                except Exception:
+                    pass
             analise = ia.ler(o["id"])
             exigidos = []
             if analise and analise["dados"]:
@@ -151,14 +153,18 @@ def main():
     pncp.coletar()
     erro = pncp.status["erro"]
     if erro:
-        log(f"PNCP com problema: {erro}")
+        log(f"PNCP com problema ({erro}); tentando de novo em 5 minutos…")
+        time.sleep(300)
+        pncp.coletar()
+        erro = pncp.status["erro"]
+        log(f"Segunda tentativa: {'falhou: ' + erro if erro else 'ok'}")
 
     lista = servico.avaliar_todas()
     lidas = ler_editais(lista, pedidos) if ia.chave() else 0
     lista = servico.avaliar_todas()  # a IA pode ter achado exigência de raio
     info = {"abertas": len(lista), "combinam": sum(1 for o in lista if o["nota"] > 0),
             "lidas_ia": lidas, "erro": f"O PNCP falhou hoje; mostrando os dados de ontem. ({erro})" if erro else None}
-    exportar_site(lista, info)
+    exportar_site(lista, info, pncp_fora=bool(erro))
 
     try:
         if alertas.email_diario(lista, servico.docs(), info):

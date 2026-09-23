@@ -65,9 +65,17 @@ em_andamento = set()
 _fila_trava = threading.Lock()
 
 
+def _limpar_chave(valor):
+    """Tira restos comuns de copiar e colar: espaços, aspas e o próprio nome 'GEMINI_API_KEY='."""
+    v = (valor or "").strip().strip('"').strip("'").strip()
+    if v.upper().startswith("GEMINI_API_KEY="):
+        v = v.split("=", 1)[1].strip().strip('"').strip("'")
+    return "".join(v.split())
+
+
 def chave():
     if os.getenv("GEMINI_API_KEY"):
-        return os.getenv("GEMINI_API_KEY")
+        return _limpar_chave(os.getenv("GEMINI_API_KEY"))
     if ARQUIVO_ENV.exists():
         for linha in ARQUIVO_ENV.read_text(encoding="utf-8").splitlines():
             if linha.strip().startswith("GEMINI_API_KEY="):
