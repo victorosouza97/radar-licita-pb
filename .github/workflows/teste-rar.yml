@@ -1,0 +1,19 @@
+name: Teste rar (temporário)
+on: workflow_dispatch
+jobs:
+  teste:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r requirements.txt
+      - name: Abre o edital de Puxinanã (.zip com .rar dentro)
+        run: |
+          which 7z 7za 7zz || echo "sem 7z"
+          python -c "
+          from radar import ia, pncp
+          docs = ia._escolher_pdfs(pncp.buscar_arquivos('09001744000103', 2026, 22))
+          print('RESULTADO:', [(t, 'texto' if isinstance(d, str) else 'pdf', len(d)) for t, d in docs])
+          "

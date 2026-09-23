@@ -5,7 +5,7 @@
 Roda sozinha no GitHub, de graça, sem precisar deixar computador ligado:
 
 - **Todo dia às 7h** o GitHub busca as licitações abertas da PB no PNCP, calcula as notas,
-  a IA lê os editais com nota 5 ou mais e o site é atualizado.
+  a IA lê os editais com nota acima de 6 e o site é atualizado.
 - Logo depois chega o **e-mail do dia**: novidades boas, prazos dos próximos 3 dias e
   documentos vencendo. Ele chega todo dia, mesmo sem novidade, para você saber que está funcionando.
 - **O site** (link do GitHub Pages) mostra tudo, no computador e no celular. O que você muda

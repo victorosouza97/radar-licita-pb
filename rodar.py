@@ -2,7 +2,7 @@
 
 1. Lê do Firebase o que você mudou no site (palavras, favoritos, descartes, documentos, pedidos de leitura).
 2. Busca as licitações abertas da PB no PNCP.
-3. A IA lê os editais das melhores e os que você pediu.
+3. A IA lê os editais com nota acima de 6 e os que você pediu.
 4. Gera os arquivos do site (pasta site/dados).
 5. Envia o e-mail do dia.
 
@@ -27,7 +27,7 @@ from radar import alertas, banco, firestore, ia, pncp, servico
 
 PASTA_SITE = Path(__file__).resolve().parent / "site"
 PASTA_DADOS_SITE = PASTA_SITE / "dados"
-NOTA_LEITURA_AUTOMATICA = 5      # a IA lê sozinha os editais com nota a partir desta
+NOTA_LEITURA_AUTOMATICA = 6      # a IA lê sozinha os editais com nota ACIMA desta
 MAX_LEITURAS_POR_DIA = int(os.getenv("RADAR_MAX_IA", "25"))
 TEMPO_MAX_IA = 25 * 60           # segundos
 
@@ -73,7 +73,7 @@ def ler_editais(lista, pedidos):
     abertas = {o["id"] for o in lista}
     fila = [p for p in pedidos if p in abertas]
     fila += [o["id"] for o in sorted(lista, key=lambda o: -o["nota"])
-             if o["nota"] >= NOTA_LEITURA_AUTOMATICA and not o["descartado"]
+             if o["nota"] > NOTA_LEITURA_AUTOMATICA and not o["descartado"]
              and o["id"] not in feitas and o["id"] not in fila]
     fila = fila[:MAX_LEITURAS_POR_DIA]
     inicio, lidas = time.time(), 0

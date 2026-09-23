@@ -137,15 +137,101 @@ def _escolher_pdfs(arquivos):
         except Exception:
             falhas += 1
             continue
-        if not dados.startswith(b"%PDF") or total + len(dados) > LIMITE_BYTES:
-            continue
-        escolhidos.append((a["titulo"], dados))
-        total += len(dados)
+        for titulo, conteudo in _abrir(a["titulo"], dados):
+            tamanho = len(conteudo)
+            if total + tamanho > LIMITE_BYTES:
+                continue
+            escolhidos.append((titulo, conteudo))
+            total += tamanho
+            if len(escolhidos) >= 3:
+                break
         if len(escolhidos) >= 2:
             break
     if not escolhidos and falhas:
         raise FalhaDownload("O PNCP não entregou o arquivo do edital agora (o site oscila). Tente de novo em alguns minutos.")
     return escolhidos
+
+
+def _extrair_rar(dados):
+    """Abre um .rar com o 7-Zip (já instalado nos computadores do GitHub). [(nome, bytes)]"""
+    import shutil
+    import subprocess
+    import tempfile
+    programa = shutil.which("7z") or shutil.which("7za") or shutil.which("7zz")
+    if not programa:
+        return []
+    with tempfile.TemporaryDirectory() as pasta:
+        arquivo = Path(pasta) / "pacote.rar"
+        arquivo.write_bytes(dados)
+        destino = Path(pasta) / "saida"
+        subprocess.run([programa, "x", "-y", f"-o{destino}", str(arquivo)],
+                       capture_output=True, timeout=120)
+        return [(p.name, p.read_bytes()) for p in sorted(destino.rglob("*"))
+                if p.is_file() and p.stat().st_size <= LIMITE_BYTES]
+
+
+def _abrir(titulo, dados, nivel=0):
+    """Devolve [(título, conteúdo)]: PDF em bytes, ou texto já extraído (Word).
+
+    Algumas plataformas (ex.: Licitanet) publicam o edital dentro de .zip, às vezes com um .rar dentro.
+    """
+    import io
+    import zipfile
+
+    if dados.startswith(b"%PDF"):
+        return [(titulo, dados)]
+    if nivel > 2:
+        return []
+    if dados.startswith(b"Rar!"):
+        saida = []
+        for nome, conteudo in _extrair_rar(dados):
+            saida += _abrir(f"{titulo} > {nome}", conteudo, nivel + 1)
+        return saida
+    if not dados.startswith(b"PK"):
+        return []
+    try:
+        pacote = zipfile.ZipFile(io.BytesIO(dados))
+    except zipfile.BadZipFile:
+        return []
+    nomes = pacote.namelist()
+    if "word/document.xml" in nomes:  # o próprio arquivo é um .docx
+        texto = _texto_do_docx(pacote)
+        return [(titulo, texto)] if texto else []
+
+    def prioridade(nome):
+        n = nome.lower()
+        return 0 if "edital" in n else 1 if "termo" in n or "tr" in n.split("/")[-1][:3] else 2
+    saida = []
+    for nome in sorted(nomes, key=prioridade):
+        if nome.endswith("/") or "__macosx" in nome.lower():
+            continue
+        info = pacote.getinfo(nome)
+        if info.file_size > LIMITE_BYTES:
+            continue
+        conteudo = pacote.read(nome)
+        rotulo = f"{titulo} > {nome.split('/')[-1]}"
+        if conteudo.startswith(b"%PDF"):
+            saida.append((rotulo, conteudo))
+        elif conteudo.startswith(b"Rar!") or (conteudo.startswith(b"PK") and nome.lower().endswith(".zip")):
+            saida += _abrir(rotulo, conteudo, nivel + 1)  # pacote dentro do pacote
+        elif conteudo.startswith(b"PK") and nome.lower().endswith(".docx"):
+            try:
+                texto = _texto_do_docx(zipfile.ZipFile(io.BytesIO(conteudo)))
+            except zipfile.BadZipFile:
+                texto = ""
+            if texto:
+                saida.append((rotulo, texto))
+    return saida
+
+
+def _texto_do_docx(pacote):
+    """Texto de um arquivo do Word (.docx), sem precisar de programa extra."""
+    import re
+    xml = pacote.read("word/document.xml").decode("utf-8", "replace")
+    xml = re.sub(r"</w:p>", "\n", xml)
+    texto = re.sub(r"<[^>]+>", "", xml)
+    import html
+    return html.unescape(texto).strip()
 
 
 def _texto_do_pdf(dados):
@@ -176,7 +262,7 @@ def _perguntar(pdfs):
         timeout=240_000, retry_options=types.HttpRetryOptions(attempts=1)))
     partes = []
     for titulo, dados in pdfs:
-        texto = _texto_do_pdf(dados)
+        texto = dados if isinstance(dados, str) else _texto_do_pdf(dados)
         if texto:
             partes.append(f"=== DOCUMENTO: {titulo} ===\n{texto[:LIMITE_TEXTO]}")
         else:
@@ -215,7 +301,7 @@ def analisar(contratacao_id):
         lista = pncp.buscar_arquivos(c["cnpj"], c["ano"], c["seq"])
         pdfs = _escolher_pdfs(lista)
         if not pdfs:
-            raise RuntimeError("Nenhum edital em PDF disponível para leitura (pode estar em .zip ou .docx).")
+            raise RuntimeError("Nenhum edital legível: o órgão publicou em formato que a IA não lê (ex.: .doc antigo, .rar ou imagem).")
         arquivos = [t for t, _ in pdfs]
         modelo, dados = _perguntar(pdfs)
     except Exception as e:

@@ -250,7 +250,7 @@ function blocoIA(o, d) {
   const a = d?.analise, x = a?.dados, pedido = state.pedidos[idSeguro(o.id)];
   if (!x) return `<div class="detail-sec"><span class="label">Leitura do edital pela IA</span>
     ${pedido ? '<p class="small"><span class="pill info">Pedido registrado</span> A IA lê este edital na próxima busca, amanhã às 7h.</p>'
-      : `<p class="small muted">A IA lê sozinha os editais com nota 5 ou mais. Para esta, peça abaixo: ela é lida na próxima busca (amanhã às 7h).</p>
+      : `<p class="small muted">A IA lê sozinha os editais com nota acima de 6. Para esta, peça abaixo: ela é lida na próxima busca (amanhã às 7h).</p>
          <div><button class="btn primary" data-pedir="${esc(o.id)}">Pedir leitura pela IA</button></div>`}</div>`;
   const lin = (rot, v) => v ? `<div><span class="label">${rot}</span><b>${esc(v)}</b></div>` : '';
   const exig = (d.exigidos || []).map(e => {
@@ -349,7 +349,7 @@ function vAjustes() {
     <section class="panel"><h3>Como o Radar trabalha</h3>
       <ul class="small" style="margin:6px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:4px">
         <li>Todo dia às 7h, o GitHub busca as licitações abertas da PB no PNCP, calcula as notas e atualiza este site.</li>
-        <li>A IA (Gemini) lê sozinha os editais com nota 5 ou mais: ${d.lidas_ia} lido(s) na última busca.</li>
+        <li>A IA (Gemini) lê sozinha os editais com nota acima de 6 (inclusive PDFs dentro de .zip e arquivos do Word): ${d.lidas_ia} lido(s) na última busca.</li>
         <li>Em seguida chega o e-mail do dia, com as novidades, os prazos dos próximos 3 dias e os documentos vencendo.</li>
         <li>A distância é calculada de Campina Grande. Se o edital exigir um raio menor que a sua distância, a licitação perde 4 pontos e fica escondida.</li>
       </ul></section>
