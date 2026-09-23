@@ -412,10 +412,13 @@ document.addEventListener('change', e => {
 
 /* ---------------- Início ---------------- */
 (async function iniciar() {
-  try {
-    const r = await fetch('dados/oportunidades.json', { cache: 'no-store' });
-    state.dados = await r.json();
-  } catch (e) {
+  for (let tentativa = 0; tentativa < 3 && !state.dados; tentativa++) {
+    try {
+      const r = await fetch('dados/oportunidades.json', { cache: 'no-store' });
+      if (r.ok) state.dados = await r.json();
+    } catch (e) { await new Promise(ok => setTimeout(ok, 1000)); }
+  }
+  if (!state.dados) {
     $('#view').innerHTML = '<p class="vazio">Os dados ainda não foram gerados. A primeira busca acontece logo depois da instalação.</p>';
     return;
   }
