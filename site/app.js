@@ -44,28 +44,54 @@ const state = {
 };
 try { const v = localStorage.getItem('rl-view'); if (v) state.view = v; } catch (e) {}
 
-let db = null;
+// O banco só abre com login do Google (as regras do Firebase liberam apenas a sua conta).
+// Sem login, o site mostra as licitações, mas favoritas, documentos, pedidos e palavras ficam fechados.
+let db = null, usuario = null, desligar = [];
 function iniciarFirebase() {
   if (!window.FIREBASE_CONFIG || !window.firebase) return;
   firebase.initializeApp(window.FIREBASE_CONFIG);
-  db = firebase.firestore();
-  db.collection('marcas').onSnapshot(s => { state.marcas = {}; s.forEach(d => state.marcas[d.id] = d.data()); aoMudar(); });
-  db.collection('pedidos_ia').onSnapshot(s => { state.pedidos = {}; s.forEach(d => state.pedidos[d.id] = d.data()); aoMudar(); });
-  db.collection('config').doc('palavras').onSnapshot(d => { state.cfg = d.exists ? d.data() : null; if (state.view === 'ajustes') render(); });
-  let semeado = false;
-  db.collection('documentos').onSnapshot(s => {
-    state.docs = []; s.forEach(d => state.docs.push({ id: d.id, ...d.data() }));
-    if (!state.docs.length && !semeado) { semeado = true; semearDocs(); }
-    aoMudar();
+  firebase.auth().onAuthStateChanged(u => {
+    usuario = u;
+    desligar.forEach(f => f()); desligar = [];
+    db = null; state.marcas = {}; state.pedidos = {}; state.docs = []; state.cfg = null;
+    if (u) conectarBanco();
+    caixaAtualizacao(); aoMudar();
   });
 }
+function conectarBanco() {
+  db = firebase.firestore();
+  const semAcesso = e => {
+    console.error(e);
+    if (e.code === 'permission-denied') { toast('Esta conta do Google não tem acesso ao Radar.'); sairGoogle(); }
+  };
+  let semeado = false;
+  desligar = [
+    db.collection('marcas').onSnapshot(s => { state.marcas = {}; s.forEach(d => state.marcas[d.id] = d.data()); aoMudar(); }, semAcesso),
+    db.collection('pedidos_ia').onSnapshot(s => { state.pedidos = {}; s.forEach(d => state.pedidos[d.id] = d.data()); aoMudar(); }, semAcesso),
+    db.collection('config').doc('palavras').onSnapshot(d => { state.cfg = d.exists ? d.data() : null; if (state.view === 'ajustes') render(); }, semAcesso),
+    db.collection('documentos').onSnapshot(s => {
+      state.docs = []; s.forEach(d => state.docs.push({ id: d.id, ...d.data() }));
+      if (!state.docs.length && !semeado) { semeado = true; semearDocs(); }
+      aoMudar();
+    }, semAcesso),
+  ];
+}
+function entrarGoogle() {
+  firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(e => {
+    if (e.code !== 'auth/popup-closed-by-user' && e.code !== 'auth/cancelled-popup-request') toast('Não foi possível entrar com o Google. Tente de novo.');
+  });
+}
+const sairGoogle = () => firebase.auth().signOut();
 async function semearDocs() {
   const lote = db.batch();
   DOCS_PADRAO.forEach(([nome, emissor, semValidade, link], i) =>
     lote.set(db.collection('documentos').doc(), { nome, emissor, sem_validade: semValidade, link_emissao: link, validade: '', link_arquivo: '', obs: '', ordem: i }));
   await lote.commit();
 }
-const semFirebase = () => { toast('O Firebase ainda não foi configurado: por enquanto o site só mostra.'); return !db; };
+const semFirebase = () => {
+  toast(window.FIREBASE_CONFIG ? 'Entre com o Google (no menu) para salvar.' : 'O Firebase ainda não foi configurado: por enquanto o site só mostra.');
+  return !db;
+};
 let tMudar;
 function aoMudar() { clearTimeout(tMudar); tMudar = setTimeout(() => { if (state.view !== 'oport') render(); else carregarLista(); }, 150); }
 
@@ -106,7 +132,9 @@ function caixaAtualizacao() {
   $('#coleta-box').innerHTML = `<span>Dados do PNCP de<br><b>${dataHoraBR(d.atualizado)}</b></span>
     ${d.erro ? `<span class="pill bad">${esc(d.erro)}</span>` : ''}
     <span class="small">O Radar busca sozinho todo dia às 7h e manda o resumo por e-mail.</span>
-    ${db ? '' : '<span class="pill warn">Firebase ainda não configurado</span>'}`;
+    ${!window.FIREBASE_CONFIG ? '<span class="pill warn">Firebase ainda não configurado</span>'
+      : usuario ? `<span class="small">Conectado: ${esc(usuario.email)}</span><button type="button" class="btn" data-sair>Sair</button>`
+      : '<button type="button" class="btn primary" data-entrar>Entrar com Google</button><span class="small">Para ver e salvar favoritas, documentos e palavras.</span>'}`;
 }
 
 /* ---------------- Painel ---------------- */
@@ -277,7 +305,7 @@ function vDocs() {
   $('#view').innerHTML = `
   <div class="view-head"><div><h2>Cofre de documentos</h2><p class="muted">A validade de cada certidão fica aqui, e o e-mail diário avisa quando algo estiver para vencer. Os arquivos (PDFs) ficam na <b>sua pasta do Google Drive</b>: cole aqui o link de cada um.</p></div>
   <button class="btn primary" data-doc="novo">Adicionar documento</button></div>
-  ${db ? '' : '<p class="pill warn" style="margin-bottom:12px">O Firebase ainda não foi configurado: a lista aparece depois dessa etapa.</p>'}
+  ${db ? '' : '<p class="pill warn" style="margin-bottom:12px">Entre com o Google (no menu) para ver e editar seus documentos.</p>'}
   <div class="panel table-wrap"><table>
     <thead><tr><th>Documento</th><th>Emissor</th><th>Validade</th><th>Situação</th><th>Arquivo</th><th></th></tr></thead>
     <tbody>${lista.map(d => `<tr>
@@ -367,8 +395,10 @@ async function salvarCfg(chave, lista) {
 
 /* ---------------- Eventos ---------------- */
 document.addEventListener('click', async e => {
-  const t = e.target.closest('[data-go],[data-sel],[data-abrir],[data-ver],[data-marcar],[data-doc],[data-rm],[data-pedir]');
+  const t = e.target.closest('[data-go],[data-sel],[data-abrir],[data-ver],[data-marcar],[data-doc],[data-rm],[data-pedir],[data-entrar],[data-sair]');
   if (!t) return;
+  if (t.hasAttribute('data-entrar')) return entrarGoogle();
+  if (t.hasAttribute('data-sair')) return sairGoogle();
   if (t.dataset.go) return go(t.dataset.go);
   if (t.dataset.abrir) { state.f.ver = 'todas'; state.sel = t.dataset.abrir; return go('oport'); }
   if (t.dataset.sel) return abrirDetalhe(t.dataset.sel);

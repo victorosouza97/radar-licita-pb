@@ -1,7 +1,8 @@
 """Leitura do Firebase (Firestore), onde o site guarda o que você muda nele.
 
-Usa a API pública do Firestore, sem senha: as regras do banco (firestore.rules) liberam
-o acesso, do mesmo jeito que no Placar 7 Wonders.
+Com o segredo FIREBASE_SA (chave da conta de serviço do projeto, em JSON), o robô entra com
+acesso próprio, que não depende das regras do banco — assim as regras podem exigir login
+com Google para todo o resto. Sem o segredo, usa a API pública (só funciona com regras abertas).
 """
 import json
 import os
@@ -10,6 +11,7 @@ import urllib.parse
 import urllib.request
 
 PROJETO = os.getenv("FIREBASE_PROJECT", "")
+_credencial = None
 
 
 def configurado():
@@ -18,6 +20,24 @@ def configurado():
 
 def _base():
     return f"https://firestore.googleapis.com/v1/projects/{PROJETO}/databases/(default)/documents"
+
+
+def _cabecalhos():
+    global _credencial
+    chave = os.getenv("FIREBASE_SA", "").strip()
+    if not chave:
+        return {}
+    if _credencial is None or not _credencial.valid:
+        from google.auth.transport.requests import Request
+        from google.oauth2 import service_account
+
+        primeira = _credencial is None
+        _credencial = service_account.Credentials.from_service_account_info(
+            json.loads(chave), scopes=["https://www.googleapis.com/auth/datastore"])
+        _credencial.refresh(Request())
+        if primeira:
+            print("Firebase: acesso com a conta de serviço (FIREBASE_SA).")
+    return {"Authorization": f"Bearer {_credencial.token}"}
 
 
 def _valor(v):
@@ -46,7 +66,7 @@ def listar(colecao):
         if token:
             q["pageToken"] = token
         url = f"{_base()}/{colecao}?{urllib.parse.urlencode(q)}"
-        with urllib.request.urlopen(url, timeout=60) as r:
+        with urllib.request.urlopen(urllib.request.Request(url, headers=_cabecalhos()), timeout=60) as r:
             dados = json.load(r)
         for d in dados.get("documents", []):
             doc_id = d["name"].rsplit("/", 1)[-1]
@@ -57,7 +77,8 @@ def listar(colecao):
 
 
 def apagar(colecao, doc_id):
-    req = urllib.request.Request(f"{_base()}/{colecao}/{urllib.parse.quote(doc_id)}", method="DELETE")
+    req = urllib.request.Request(f"{_base()}/{colecao}/{urllib.parse.quote(doc_id)}", method="DELETE",
+                                 headers=_cabecalhos())
     try:
         urllib.request.urlopen(req, timeout=60).close()
     except urllib.error.HTTPError:
