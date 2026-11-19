@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Radar mudou para o app</title>
+<script>
+  // Links antigos do e-mail (#<nº PNCP com _>) abrem a mesma licitação no app.
+  var h = location.hash.slice(1), destino = "https://app.souzautolub.com.br/licitacoes";
+  if (/^\d{14}-\d+-\d+_\d{4}$/.test(h)) destino += "?id=" + encodeURIComponent(h.replace(/_(\d{4})$/, "/$1"));
+  location.replace(destino);
+</script>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 560px; margin: 15vh auto; padding: 0 16px; color: #1f2328; background: #fff; }
+  a { color: #0b6a7f; font-weight: 600; }
+  @media (prefers-color-scheme: dark) { body { color: #e6edf3; background: #0d1117; } a { color: #58c4dc; } }
+</style>
+</head>
+<body>
+<h1>O Radar de Licitações mudou de endereço</h1>
+<p>Agora ele fica dentro do app da Souzauto, com login: <a href="https://app.souzautolub.com.br/licitacoes">app.souzautolub.com.br/licitacoes</a>.</p>
+</body>
+</html>
